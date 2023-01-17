@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>MusicPlayer|Playlists</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script type="text/javascript" src="playlists.js"></script>
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  <style>
+    body{
+      background-color: rgb(114, 172, 114);
+    }
+    .button{
+        align-self: center;
+    }
+  </style>
+</head>
+<body onload="init()" style="background: linear-gradient(to bottom, #339933 0%, #003300 100%)">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="color:white">
+    <a class="navbar-brand">MusicPlayer</a> 
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+      <ul class="navbar-nav">
+        <li class="nav-item active">
+          <a class="nav-link" href="http://localhost:8000">Home <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Entities
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+            <a class="dropdown-item" href="http://localhost:8000/admins" class="list-group-item">Admins</a>
+            <a class="dropdown-item" href="http://localhost:8000/artists" class="list-group-item">Artists</a>
+            <a class="dropdown-item" href="http://localhost:8000/collaborations" class="list-group-item">Collaborations</a>
+            <a class="dropdown-item" href="http://localhost:8000/artistCollaborations" class="list-group-item">Artists in collaborations</a>
+            <a class="dropdown-item" href="http://localhost:8000/recordLabels" class="list-group-item">Record Labels</a>
+            <a class="dropdown-item" href="http://localhost:8000/songs" class="list-group-item">Songs</a>
+            <a class="dropdown-item" href="http://localhost:8000/albums" class="list-group-item">Albums</a>
+            <a class="dropdown-item" href="http://localhost:8000/podcasts" class="list-group-item">Podcasts</a>
+            <a class="dropdown-item" href="http://localhost:8000/episodes" class="list-group-item">Episodes</a>
+            <a class="dropdown-item" href="http://localhost:8000/listenerPodcasts" class="list-group-item">Listeners to podcast</a>
+            <a class="dropdown-item" href="http://localhost:8000/playlists" class="list-group-item">Playlists</a>
+            <a class="dropdown-item" href="http://localhost:8000/playlistSongs" class="list-group-item">Songs in playlists</a>
+            <a class="dropdown-item" href="http://localhost:8000/reviews" class="list-group-item">Reviews</a>
+            <a class="dropdown-item" href="http://localhost:8000/listeners" class="list-group-item">Listeners</a>
+            <a class="dropdown-item" href="http://localhost:8000/follows" class="list-group-item">Following</a>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </nav>
+  <h1>Music player</h1>
+  <h2>Playlists</h2>
+  <div class="container">
+    <div class="row">
+      <div class="col-8">
+        <table class="table table-hover table-dark">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Title</th>
+              <th>Listener</th>
+            </tr>
+          </thead>
+          <tbody id="playlists">
+
+          </tbody>
+        </table>
+      </div>
+      <div class="col-4">
+
+        <div class="container" style="height: 1000px;">
+          <div class="row">
+            <div class="card">
+              <div class="card-body">
+                <h4>Add new playlist</h4>
+                <form id="noviTask">
+                  <div class="row">
+                    <div class="col-sm-6">
+
+                      <div class="mb-2">
+                        <label for="new_playlist_title" class="form-label">Title:</label>
+                        <input type="text" class="form-control" id="new_playlist_title">
+                      </div>
+                      <div class="mb-2">
+                        <label for="new_playlist_listener" class="form-label">Listener:</label>
+                        <input type="text" class="form-control" id="new_playlist_listener">
+                      </div>
+                    </div>
+                    <div class="col-sm-6">
+                      <button type="button" id="add_playlist" class="btn btn-success">Add</button>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="card">
+              <div class="card-body">
+                <h4>Edit playlist</h4>
+                <form id="noviTask">
+                  <div class="row">
+                    <div class="col-sm-6">
+                      <div class="mb-2">
+                        <label  class="form-label">ID:</label>
+                        <label id="change_playlist_id" class="form-label"></label>
+                      </div>
+                      <div class="mb-2">
+                        <label for="change_playlist_title" class="form-label">Title:</label>
+                        <input type="text" class="form-control" id="change_playlist_title">
+                      </div>
+                      <div class="mb-2">
+                        <label for="change_playlist_listener" class="form-label">Listener:</label>
+                        <input type="text" class="form-control" id="change_playlist_listener">
+                      </div>
+                    </div>
+                    <div class="col-sm-6">
+                      <button type="button" id="change_playlist" class="btn btn-success">Change</button>
+                      <button id="empty" type="button" class="btn btn-success">Empty</button>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="card">
+              <div class="card-body">
+                <h4>Delete playlist</h4>
+                <form id="delete_playlist_form">
+                  <div class="row">
+                    <div class="col">
+                      <label for="delete_playlist_id" class="form-label">Playlist ID:</label>
+                        <input type="text" class="form-control" id="delete_playlist_id">
+                    </div>
+                    <div class="col">
+                      <button id="delete_playlist" type="button" class="btn btn-success">Delete</button>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        
+
+      </div>
+    </div>
+  </div>
+</body>
+</html> 
